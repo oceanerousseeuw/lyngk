@@ -17,4 +17,8 @@ Lyngk.Coordinates = function (c, l) {
         }
         return true;
     }
+
+    this.toString = function(){
+        return concat;
+    }
 };

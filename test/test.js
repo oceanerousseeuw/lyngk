@@ -28,5 +28,5 @@ LyngkTestCase.prototype.testStory2 = function(){
 
 LyngkTestCase.prototype.testStory3 = function(){
     var coordinates = new Lyngk.Coordinates('A',3);
-    assertTrue(coordinates.toString('A', 3) === "A3");
+    assertTrue(coordinates.toString() === "A3");
 }
