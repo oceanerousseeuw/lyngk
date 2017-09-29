@@ -7,3 +7,20 @@ LyngkTestCase.prototype.testStory1 = function(){
     var coordinates = new Lyngk.Coordinates('A',1);
     assertFalse(coordinates.is_valid());
 }
+
+
+LyngkTestCase.prototype.testStory2 = function(){
+
+    var count=0;
+    var col = "ABCDEFGHI";
+
+    for(var i = 0; i<col.length; i++){
+        for(var j = 1; j<=9; j++){
+            var coordinates = new Lyngk.Coordinates(col[i],j);
+            if(coordinates.is_valid()){
+                count++;
+            }
+        }
+    }
+    assertTrue(count === 43);
+}
