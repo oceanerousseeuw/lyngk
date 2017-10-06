@@ -21,4 +21,14 @@ Lyngk.Coordinates = function (c, l) {
     this.toString = function(){
         return concat;
     }
+
+    this.invalid = function(){
+        var valid = this.is_valid();
+        if(!valid){
+            concat = "invalid";
+        }else{
+            concat = "valid";
+        }
+        return concat;
+    }
 };
