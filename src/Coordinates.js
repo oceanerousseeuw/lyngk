@@ -35,5 +35,12 @@ Lyngk.Coordinates = function (c, l) {
     this.clone = function(){
         var newCoord = concat;
         return newCoord;
-    }
+    };
+
+    this.hash = function(){
+        var colAsciiChar = String(c.charCodeAt(0));
+        var charHash = colAsciiChar + String(l);
+        var nbHash = parseInt(charHash);
+        return nbHash;
+    };
 };
