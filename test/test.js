@@ -78,5 +78,10 @@ LyngkTestCase.prototype.testStory10 = function () {
     }
     assertTrue(intersection.getState() === Lyngk.State.FULL_STACK);
 
-}
-;
+};
+
+LyngkTestCase.prototype.testStory11 = function(){
+    var plateau = new Lyngk.Engine();
+    plateau.initialize();
+    assertTrue(plateau.initialize() === true);
+};
