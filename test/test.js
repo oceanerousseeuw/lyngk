@@ -35,3 +35,9 @@ LyngkTestCase.prototype.testStory4 = function () {
     var coordinates = new Lyngk.Coordinates("A",1);
     assertTrue(coordinates.invalid() === "invalid");
 }
+
+LyngkTestCase.prototype.testStory5 = function(){
+    var coordinates = new Lyngk.Coordinates('A',1);
+    var newCoord = coordinates.clone(coordinates);
+    assertTrue(coordinates == newCoord);
+}
