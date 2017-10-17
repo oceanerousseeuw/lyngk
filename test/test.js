@@ -53,9 +53,17 @@ LyngkTestCase.prototype.testStory7 = function(){
 };
 
 LyngkTestCase.prototype.testStory8 = function(){
-    var piece = new Lyngk.Piece("blue");
+    var piece = new Lyngk.Piece("bleu");
     var intersection = new Lyngk.Intersection();
     intersection.poserPiece(piece);
-    assertTrue(intersection.getColor() === "blue" && intersection.getState() === Lyngk.State.ONE_PIECE);
+    assertTrue(intersection.getColor() === "bleu" && intersection.getState() === Lyngk.State.ONE_PIECE);
+};
 
+LyngkTestCase.prototype.testStory9 = function(){
+    var pieceBleu = new Lyngk.Piece("bleu");
+    var intersection = new Lyngk.Intersection();
+    intersection.poserPiece(pieceBleu);
+    var pieceRouge = new Lyngk.Piece("rouge");
+    intersection.poserPiece(pieceRouge);
+    assertTrue(intersection.getColor() === "rouge" && intersection.getState() === Lyngk.State.STACK);
 };
