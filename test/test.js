@@ -39,5 +39,5 @@ LyngkTestCase.prototype.testStory4 = function () {
 LyngkTestCase.prototype.testStory5 = function(){
     var coordinates = new Lyngk.Coordinates('A',1);
     var newCoord = coordinates.clone();
-    assertTrue(coordinates == newCoord);
+    assertTrue(coordinates.toString() == newCoord);
 };

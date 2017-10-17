@@ -16,11 +16,11 @@ Lyngk.Coordinates = function (c, l) {
             }
         }
         return true;
-    }
+    };
 
     this.toString = function(){
         return concat;
-    }
+    };
 
     this.invalid = function(){
         var valid = this.is_valid();
@@ -30,5 +30,10 @@ Lyngk.Coordinates = function (c, l) {
             concat = "valid";
         }
         return concat;
+    };
+
+    this.clone = function(){
+        var newCoord = concat;
+        return newCoord;
     }
 };
