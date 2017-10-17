@@ -6,7 +6,7 @@ var LyngkTestCase = TestCase("LyngkTestCase");
 LyngkTestCase.prototype.testStory1 = function(){
     var coordinates = new Lyngk.Coordinates('A',1);
     assertFalse(coordinates.is_valid());
-}
+};
 
 
 LyngkTestCase.prototype.testStory2 = function(){
@@ -23,21 +23,21 @@ LyngkTestCase.prototype.testStory2 = function(){
         }
     }
     assertTrue(count === 43);
-}
+};
 
 
 LyngkTestCase.prototype.testStory3 = function(){
     var coordinates = new Lyngk.Coordinates('A',3);
     assertTrue(coordinates.toString() === "A3");
-}
+};
 
 LyngkTestCase.prototype.testStory4 = function () {
     var coordinates = new Lyngk.Coordinates("A",1);
     assertTrue(coordinates.invalid() === "invalid");
-}
+};
 
 LyngkTestCase.prototype.testStory5 = function(){
     var coordinates = new Lyngk.Coordinates('A',1);
-    var newCoord = coordinates.clone(coordinates);
+    var newCoord = coordinates.clone();
     assertTrue(coordinates == newCoord);
-}
+};
