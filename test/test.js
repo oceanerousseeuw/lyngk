@@ -49,12 +49,13 @@ LyngkTestCase.prototype.testStory6 = function(){
 
 LyngkTestCase.prototype.testStory7 = function(){
     var intersection = new Lyngk.Intersection("");
-    assertTrue(intersection.defaultState() === Lyngk.State.VACANT);
+    assertTrue(intersection.getState() === Lyngk.State.VACANT);
 };
 
 LyngkTestCase.prototype.testStory8 = function(){
     var piece = new Lyngk.Piece("blue");
-    var intersection = new Lyngk.Intersection(piece.getColor());
+    var intersection = new Lyngk.Intersection();
+    intersection.poserPiece(piece);
     assertTrue(intersection.getColor() === "blue" && intersection.getState() === Lyngk.State.ONE_PIECE);
 
 };
