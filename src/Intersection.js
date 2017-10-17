@@ -17,6 +17,8 @@ Lyngk.Intersection = function (c) {
                 return Lyngk.State.ONE_PIECE;
             }else if(nbPiece >= 2 && nbPiece < 5){
                 return Lyngk.State.STACK;
+            }else{
+                return Lyngk.State.FULL_STACK;
             }
         }
     };
