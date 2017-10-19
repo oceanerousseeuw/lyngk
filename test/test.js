@@ -88,3 +88,15 @@ LyngkTestCase.prototype.testStory11 = function(){
         assertTrue(monPlateau[i].getState() === Lyngk.State.ONE_PIECE);
     }
 };
+
+LyngkTestCase.prototype.testStory12 = function(){
+    var plateau = new Lyngk.Engine();
+    plateau.initialize();
+    var monPlateau = plateau.getPlateau();
+    assertTrue(monPlateau.getBlack() === 8);
+    assertTrue(monPlateau.getIvory() === 8);
+    assertTrue(monPlateau.getBlue() === 8);
+    assertTrue(monPlateau.getRed() === 8);
+    assertTrue(monPlateau.getGreen() === 8);
+    assertTrue(monPlateau.getWhite() === 3);
+};
