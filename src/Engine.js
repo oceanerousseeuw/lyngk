@@ -96,5 +96,29 @@ Lyngk.Engine = function () {
 
     this.getPlateau = function(){
         return plateau;
-    }
+    };
+
+    this.getBlack = function(){
+        return countBlack;
+    };
+
+    this.getIvory = function(){
+        return countIvory;
+    };
+
+    this.getBlue = function(){
+        return countBlue;
+    };
+
+    this.getRed = function(){
+        return countRed;
+    };
+
+    this.getGreen = function(){
+        return countGreen;
+    };
+
+    this.getWhite = function(){
+        return countWhite;
+    };
 };
