@@ -83,5 +83,8 @@ LyngkTestCase.prototype.testStory10 = function () {
 LyngkTestCase.prototype.testStory11 = function(){
     var plateau = new Lyngk.Engine();
     plateau.initialize();
-    assertTrue(plateau.initialize() === true);
+    var monPlateau = plateau.getPlateau();
+    for(var i=0; i<monPlateau.length; i++){
+        assertTrue(monPlateau[i].getState() === Lyngk.State.ONE_PIECE);
+    }
 };

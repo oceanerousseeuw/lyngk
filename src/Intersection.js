@@ -6,7 +6,11 @@ Lyngk.Intersection = function (c) {
 
     var nbPiece = 0;
     var color;
+    var coordinates = c;
 
+    this.getCoordinates = function(){
+        return coordinates;
+    }
 
     this.getState = function(){
         if(nbPiece === 0){
