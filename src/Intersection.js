@@ -9,6 +9,10 @@ Lyngk.Intersection = function (c) {
     var coordinates = c;
     var piecesList = [];
 
+    this.getCoord = function(){
+        return coordinates;
+    };
+
     this.getState = function(){
         if(nbPiece === 0){
             return Lyngk.State.VACANT;
@@ -28,8 +32,20 @@ Lyngk.Intersection = function (c) {
         return color;
     };
 
+    this.setColor = function(myNewColor){
+        color = myNewColor;
+    };
+
     this.getNbPieces = function(){
         return nbPiece;
+    };
+
+    this.setDecNbPieces = function(){
+      nbPiece--;
+    };
+
+    this.setIncNbPieces = function(){
+      nbPiece++;
     };
 
     this.getPiecesList = function(){

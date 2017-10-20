@@ -114,4 +114,31 @@ Lyngk.Engine = function () {
     this.getWhite = function(){
         return countWhite;
     };
+
+    this.getIntersection = function(c){
+        for(var i=0; i<plateau.length; i++){
+            if(plateau[i].getCoord().toString() === c){
+                return plateau[i];
+            }
+        }
+    };
+
+    this.movePiece = function(coord1, coord2){
+        //couleur de la piece a déplacer
+        var color;
+        //on décrémente le nombre de pieces sur la premiere intersection
+        for(var i=0; i<plateau.length; i++){
+            if(plateau[i].getCoord().toString() === coord1){
+                color = plateau[i].getColor();
+                plateau[i].setDecNbPieces();
+            }
+        }
+        //on incrémente le nombre de pieces de deuxieme intersection et on change la couleur
+        for(var i=0; i<plateau.length; i++){
+            if(plateau[i].getCoord().toString() === coord2) {
+                plateau[i].setIncNbPieces();
+                plateau[i].setColor(color);
+            }
+        }
+    }
 };

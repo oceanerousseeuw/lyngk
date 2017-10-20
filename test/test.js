@@ -123,7 +123,7 @@ LyngkTestCase.prototype.testStory15 = function(){
     var plateau = new Lyngk.Engine();
     plateau.initialize();
     var color = plateau.getIntersection("A3").getColor();
-    plateau.movePiece("A3", "A4");
+    plateau.movePiece("A3", "B3");
     assertTrue(plateau.getIntersection("A3").getState() === Lyngk.State.VACANT);
     assertTrue(plateau.getIntersection("B3").getColor() === color);
 };
