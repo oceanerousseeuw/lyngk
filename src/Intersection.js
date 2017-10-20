@@ -31,8 +31,12 @@ Lyngk.Intersection = function (c) {
         return color;
     };
 
+    this.getNbPieces = function(){
+        return nbPiece;
+    };
+
     this.poserPiece = function(piece){
         color = piece.getColor();
         nbPiece ++;
-    }
+    };
 };

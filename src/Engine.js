@@ -3,16 +3,16 @@
 // enums definition
 Lyngk.Color = {BLACK: 0, IVORY: 1, BLUE: 2, RED: 3, GREEN: 4, WHITE: 5};
 
-var countBlack = 0;
-var countIvory = 0;
-var countBlue = 0;
-var countRed = 0;
-var countGreen = 0;
-var countWhite = 0;
 
 Lyngk.Engine = function () {
 
     var plateau = [];
+    var countBlack = 0;
+    var countIvory = 0;
+    var countBlue = 0;
+    var countRed = 0;
+    var countGreen = 0;
+    var countWhite = 0;
 
     this.initialize = function(){
         var lettres = "ABCDEFGHI";
