@@ -8,10 +8,6 @@ Lyngk.Intersection = function (c) {
     var color;
     var coordinates = c;
 
-    this.getCoordinates = function(){
-        return coordinates;
-    }
-
     this.getState = function(){
         if(nbPiece === 0){
             return Lyngk.State.VACANT;

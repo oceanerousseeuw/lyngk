@@ -26,8 +26,6 @@ Lyngk.Coordinates = function (c, l) {
         var valid = this.is_valid();
         if(!valid){
             concat = "invalid";
-        }else{
-            concat = "valid";
         }
         return concat;
     };

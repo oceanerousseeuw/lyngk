@@ -44,7 +44,6 @@ Lyngk.Engine = function () {
                 }else{
                     return this.randomCouleur();
                 }
-                break;
 
             case 1 :
                 if(countIvory < 8){
@@ -53,7 +52,6 @@ Lyngk.Engine = function () {
                 }else{
                     return this.randomCouleur();
                 }
-                break;
 
             case 2 :
                 if(countBlue < 8){
@@ -62,7 +60,6 @@ Lyngk.Engine = function () {
                 }else{
                     return this.randomCouleur();
                 }
-                break;
 
             case 3 :
                 if(countRed < 8){
@@ -71,7 +68,6 @@ Lyngk.Engine = function () {
                 }else{
                     return this.randomCouleur();
                 }
-                break;
 
             case 4 :
                 if(countGreen < 8){
@@ -80,7 +76,6 @@ Lyngk.Engine = function () {
                 }else{
                     return this.randomCouleur();
                 }
-                break;
 
             case 5 :
                 if(countWhite < 3){
@@ -89,9 +84,7 @@ Lyngk.Engine = function () {
                 }else{
                     return this.randomCouleur();
                 }
-                break;
         }
-        return false;
     };
 
     this.getPlateau = function(){
