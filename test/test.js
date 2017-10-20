@@ -53,24 +53,24 @@ LyngkTestCase.prototype.testStory7 = function () {
 };
 
 LyngkTestCase.prototype.testStory8 = function () {
-    var piece = new Lyngk.Piece("bleu");
+    var piece = new Lyngk.Piece("BLUE");
     var intersection = new Lyngk.Intersection();
     intersection.poserPiece(piece);
-    assertTrue(intersection.getColor() === "bleu" && intersection.getState() === Lyngk.State.ONE_PIECE);
+    assertTrue(intersection.getColor() === "BLUE" && intersection.getState() === Lyngk.State.ONE_PIECE);
 };
 
 LyngkTestCase.prototype.testStory9 = function () {
-    var pieceBleu = new Lyngk.Piece("bleu");
+    var pieceBleu = new Lyngk.Piece("BLUE");
     var intersection = new Lyngk.Intersection();
     intersection.poserPiece(pieceBleu);
-    var pieceRouge = new Lyngk.Piece("rouge");
+    var pieceRouge = new Lyngk.Piece("RED");
     intersection.poserPiece(pieceRouge);
-    assertTrue(intersection.getColor() === "rouge" && intersection.getState() === Lyngk.State.STACK);
+    assertTrue(intersection.getColor() === "RED" && intersection.getState() === Lyngk.State.STACK);
 };
 
 LyngkTestCase.prototype.testStory10 = function () {
     var intersection = new Lyngk.Intersection();
-    var pieceRouge = new Lyngk.Piece("rouge");
+    var pieceRouge = new Lyngk.Piece("RED");
     var i = 1;
     while (i <= 5) {
         intersection.poserPiece(pieceRouge);
@@ -117,4 +117,13 @@ LyngkTestCase.prototype.testStory14 = function(){
         assertTrue(monPlateau[i].getPiecesList().length >= 1);
         assertTrue(monPlateau[i].getPiecesList().length <=5);
     }
+};
+
+LyngkTestCase.prototype.testStory15 = function(){
+    var plateau = new Lyngk.Engine();
+    plateau.initialize();
+    var color = plateau.getIntersection("A3").getColor();
+    plateau.movePiece("A3", "A4");
+    assertTrue(plateau.getIntersection("A3").getState() === Lyngk.State.VACANT);
+    assertTrue(plateau.getIntersection("B3").getColor() === color);
 };
