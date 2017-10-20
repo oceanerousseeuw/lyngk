@@ -99,3 +99,12 @@ LyngkTestCase.prototype.testStory12 = function(){
     assertTrue(plateau.getGreen() === 8);
     assertTrue(plateau.getWhite() === 3);
 };
+
+LyngkTestCase.prototype.testStory13 = function() {
+    var plateau = new Lyngk.Engine();
+    plateau.initialize();
+    var monPlateau = plateau.getPlateau();
+    for(var i=0; i<monPlateau.length; i++){
+        assertTrue(monPlateau[i].getNbPieces() === 1);
+    }
+};
