@@ -108,3 +108,13 @@ LyngkTestCase.prototype.testStory13 = function() {
         assertTrue(monPlateau[i].getNbPieces() === 1);
     }
 };
+
+LyngkTestCase.prototype.testStory14 = function(){
+    var plateau = new Lyngk.Engine();
+    plateau.initialize();
+    var monPlateau = plateau.getPlateau();
+    for(var i=0; i<monPlateau.length; i++){
+        assertTrue(monPlateau[i].getPiecesList() >= 1);
+        assertTrue(monPlateau[i].getPiecesList() <=5);
+    }
+};
