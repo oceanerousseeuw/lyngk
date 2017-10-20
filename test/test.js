@@ -114,7 +114,7 @@ LyngkTestCase.prototype.testStory14 = function(){
     plateau.initialize();
     var monPlateau = plateau.getPlateau();
     for(var i=0; i<monPlateau.length; i++){
-        assertTrue(monPlateau[i].getPiecesList() >= 1);
-        assertTrue(monPlateau[i].getPiecesList() <=5);
+        assertTrue(monPlateau[i].getPiecesList().length >= 1);
+        assertTrue(monPlateau[i].getPiecesList().length <=5);
     }
 };
