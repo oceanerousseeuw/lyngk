@@ -127,9 +127,16 @@ Lyngk.Engine = function () {
         var color;
         var pile = [];
 
+        //Soit avoir la meme lettre et pas le meme chiffre
+        //soit avoir le meme chiffre et pas la meme lettre
+        var possible;
+        if( (coord1[0]===coord2[0] && coord1[1]!==coord2[1]) || (coord1[0]!==coord2[0] && coord1[1]===coord2[1])){
+            possible = true;
+        }
+
         for(var a=0; a<plateau.length; a++){
             if(plateau[a].getCoord().toString() === coord2){
-                if(plateau[a].getState() !== Lyngk.State.VACANT){
+                if((plateau[a].getState()!==Lyngk.State.VACANT) && possible){
                     for(var i=0; i<plateau.length; i++){
                         if(plateau[i].getCoord().toString() === coord1){
                             //on stocke les infos de la case à changer
