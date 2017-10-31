@@ -124,21 +124,29 @@ Lyngk.Engine = function () {
     };
 
     this.movePiece = function(coord1, coord2){
-        //couleur de la piece a déplacer
         var color;
-        //on décrémente le nombre de pieces sur la premiere intersection
+        var pile = [];
+
         for(var i=0; i<plateau.length; i++){
             if(plateau[i].getCoord().toString() === coord1){
+                //on stocke les infos de la case à changer
                 color = plateau[i].getColor();
+                //nbPiDeplace = plateau[i].getNbPieces();
+                pile = plateau[i].getPiecesList();
+                //on vide la case
                 plateau[i].setDecNbPieces();
+                plateau[i].setDecPieceList();
+                plateau[i].setColor("");
             }
         }
-        //on incrémente le nombre de pieces de deuxieme intersection et on change la couleur
+
         for(var i=0; i<plateau.length; i++){
-            if(plateau[i].getCoord().toString() === coord2) {
-                plateau[i].setIncNbPieces();
-                plateau[i].setColor(color);
+            if(plateau[i].getCoord().toString() === coord2){
+                for(var j= 0; j<pile.length; j++){
+                    plateau[i].poserPiece(pile[j]);
+                }
             }
         }
-    }
+    };
+
 };
