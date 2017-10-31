@@ -127,24 +127,32 @@ Lyngk.Engine = function () {
         var color;
         var pile = [];
 
-        for(var i=0; i<plateau.length; i++){
-            if(plateau[i].getCoord().toString() === coord1){
-                //on stocke les infos de la case à changer
-                color = plateau[i].getColor();
-                //nbPiDeplace = plateau[i].getNbPieces();
-                pile = plateau[i].getPiecesList();
-                //on vide la case
-                plateau[i].setDecNbPieces();
-                plateau[i].setDecPieceList();
-                plateau[i].setColor("");
-            }
-        }
+        for(var a=0; a<plateau.length; a++){
+            if(plateau[a].getCoord().toString() === coord2){
+                if(plateau[a].getState() !== Lyngk.State.VACANT){
+                    for(var i=0; i<plateau.length; i++){
+                        if(plateau[i].getCoord().toString() === coord1){
+                            //on stocke les infos de la case à changer
+                            color = plateau[i].getColor();
+                            //nbPiDeplace = plateau[i].getNbPieces();
+                            pile = plateau[i].getPiecesList();
+                            //on vide la case
+                            plateau[i].setDecNbPieces();
+                            plateau[i].setDecPieceList();
+                            plateau[i].setColor("");
+                        }
+                    }
 
-        for(var i=0; i<plateau.length; i++){
-            if(plateau[i].getCoord().toString() === coord2){
-                for(var j= 0; j<pile.length; j++){
-                    plateau[i].poserPiece(pile[j]);
+                    for(var i=0; i<plateau.length; i++){
+                        if(plateau[i].getCoord().toString() === coord2){
+                            for(var j= 0; j<pile.length; j++){
+                                plateau[i].poserPiece(pile[j]);
+                            }
+                        }
+                    }
+                    return true;
                 }
+                return false;
             }
         }
     };
