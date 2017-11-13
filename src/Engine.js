@@ -171,6 +171,9 @@ Lyngk.Engine = function () {
         if((interDep.getNbPieces() === 1) && (interArr.getNbPieces()>1)){
             return false;
         }
+        if(interDep.getNbPieces() < interArr.getNbPieces()){
+            return false;
+        }
 
         var deplaceType;
 
