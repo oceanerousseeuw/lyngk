@@ -127,17 +127,7 @@ Lyngk.Engine = function () {
         var color;
         var pile = [];
 
-        //test des lignes te colonnes
-        //Soit avoir la meme lettre et pas le meme chiffre
-        //soit avoir le meme chiffre et pas la meme lettre
-        var possible=false;
-        if( (coord1[0]===coord2[0] && coord1[1]!==coord2[1]) || (coord1[0]!==coord2[0] && coord1[1]===coord2[1])){
-            possible = true;
-        }
-        //test des diagonales
-        if(((coord1[0].charCodeAt())-(coord2[0].charCodeAt())) === (coord1[1]-coord2[1])){
-            possible=true;
-        }
+        var possible = this.possible(coord1, coord2);
 
         for(var a=0; a<plateau.length; a++){
             if(plateau[a].getCoord().toString() === coord2){
@@ -167,6 +157,110 @@ Lyngk.Engine = function () {
                 return false;
             }
         }
+    };
+
+
+
+    this.possible = function(coord1, coord2){
+
+        var deplaceType;
+
+        //test des lignes
+        if( (coord1[0]===coord2[0] && coord1[1]!==coord2[1]))
+            deplaceType = "ligne";
+        //test des colonnes
+        else if( (coord1[0]!==coord2[0] && coord1[1]===coord2[1]))
+            deplaceType = "colonne";
+        //test des diagonales
+        else if(Math.abs(coord1[0].charCodeAt()-coord2[0].charCodeAt()) === Math.abs(coord1[1]-coord2[1]))
+            deplaceType = "diagonale";
+        else{
+            return false;
+        }
+
+        //test déplacement à la ligne suivante
+        if(deplaceType === "ligne"){
+            var coordTemp = coord1;
+
+            //si on remonte dans les lignes (ex: de 3 a 2)
+            if(parseInt(coord1[1]) - parseInt(coord2[1]) > 0){
+                while (coordTemp !== coord2){
+                    coordTemp = coordTemp[0] + (parseInt(coordTemp[1])-1);
+                    var interTemp = this.getIntersection(coordTemp);
+                    if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
+                        return false;
+                    }
+                }
+                return true;
+            }else{
+                //si on avance dans les lignes (ex: de 2 a 3)
+                while (coordTemp !== coord2){
+                    coordTemp = coordTemp[0] + (parseInt(coordTemp[1])+1);
+                    var interTemp = this.getIntersection(coordTemp);
+                    if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+
+        //test déplacement à la colonne suivante
+        if(deplaceType === "colonne"){
+            var coordTemp = coord1;
+
+            //si on remonte dans les colonnes (ex: de B a A)
+            if(((coord1.charCodeAt(0))-(coord2.charCodeAt(0))) > 0){
+                while (coordTemp !== coord2){
+                    coordTemp = String.fromCharCode(coordTemp.charCodeAt(0)-1) + coordTemp[1];
+                    var interTemp = this.getIntersection(coordTemp);
+                    if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
+                        return false;
+                    }
+                }
+                return true;
+            }else{
+               //si on va a une colonne plus loin (ex: de A a B)
+                while (coordTemp !== coord2){
+                    coordTemp = String.fromCharCode(coordTemp.charCodeAt(0)+1) + coordTemp[1];
+                    var interTemp = this.getIntersection(coordTemp);
+                    if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+
+        //test déplacement à la diagonale suivante
+        if(deplaceType === "diagonale"){
+            var coordTemp = coord1;
+
+            //si on remonte dans les diagonales (ex: de A3 a B4)
+            if((coord1[0].charCodeAt()-coord2[0].charCodeAt()) < 0){
+                while (coordTemp !== coord2){
+                    coordTemp = String.fromCharCode(coordTemp.charCodeAt(0)+1) + (parseInt(coordTemp[1])+1);
+                    var interTemp = this.getIntersection(coordTemp);
+                    if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
+                        return false;
+                    }
+                }
+                return true;
+            }else {
+                while (coordTemp !== coord2){
+                    coordTemp = String.fromCharCode(coordTemp.charCodeAt(0)-1) + (parseInt(coordTemp[1])-1);
+                    var interTemp = this.getIntersection(coordTemp);
+                    if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+        return false;
     };
 
 };
