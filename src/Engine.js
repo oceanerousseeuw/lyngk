@@ -127,11 +127,16 @@ Lyngk.Engine = function () {
         var color;
         var pile = [];
 
+        //test des lignes te colonnes
         //Soit avoir la meme lettre et pas le meme chiffre
         //soit avoir le meme chiffre et pas la meme lettre
-        var possible;
+        var possible=false;
         if( (coord1[0]===coord2[0] && coord1[1]!==coord2[1]) || (coord1[0]!==coord2[0] && coord1[1]===coord2[1])){
             possible = true;
+        }
+        //test des diagonales
+        if(((coord1[0].charCodeAt())-(coord2[0].charCodeAt())) === (coord1[1]-coord2[1])){
+            possible=true;
         }
 
         for(var a=0; a<plateau.length; a++){
