@@ -212,3 +212,30 @@ LyngkTestCase.prototype.testStory22 = function(){
   assertTrue(plateau.getIntersection("G6").getPiecesList() === pile);
   assertTrue(plateau.getIntersection("G6").getNbPieces() === height);
 };
+
+LyngkTestCase.prototype.testStory23 = function(){
+  var plateau = new Lyngk.Engine();
+  plateau.initialize();
+  for(var a=0; a<plateau.length; a++){
+      if(plateau[a].getCoord().toString() === "A3"){
+          plateau[a].setColor("BLUE");
+      }
+      if(plateau[a].getCoord().toString() === "B2"){
+          plateau[a].setColor("RED");
+      }
+      if(plateau[a].getCoord().toString() === "B3"){
+          plateau[a].setColor("IVORY");
+      }
+      if(plateau[a].getCoord().toString() === "C2"){
+          plateau[a].setColor("GREEN");
+      }
+      if(plateau[a].getCoord().toString() === "A3"){
+          plateau[a].setColor("BLUE");
+      }
+  }
+  plateau.movePiece("A3","B3");
+  plateau.movePiece("B3","B2");
+  plateau.movePiece("B2","C2");
+  assertFalse(plateau.movePiece("C2","D2"));
+
+};
