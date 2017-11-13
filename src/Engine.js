@@ -168,6 +168,9 @@ Lyngk.Engine = function () {
         if((interDep.getNbPieces()+interArr.getNbPieces()) > 5 ){
             return false;
         }
+        if((interDep.getNbPieces() === 1) && (interArr.getNbPieces()>1)){
+            return false;
+        }
 
         var deplaceType;
 
