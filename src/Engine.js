@@ -163,6 +163,12 @@ Lyngk.Engine = function () {
 
     this.possible = function(coord1, coord2){
 
+        var interDep = this.getIntersection(coord1);
+        var interArr = this.getIntersection(coord2);
+        if((interDep.getNbPieces()+interArr.getNbPieces()) > 5 ){
+            return false;
+        }
+
         var deplaceType;
 
         //test des lignes
