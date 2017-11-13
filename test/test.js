@@ -198,5 +198,17 @@ LyngkTestCase.prototype.testStory21 = function(){
   assertFalse(plateau.movePiece("C3", "B3"));
   assertTrue(plateau.getIntersection("B3").getPiecesList() === pile);
   assertTrue(plateau.getIntersection("B3").getNbPieces() === height);
+};
 
+LyngkTestCase.prototype.testStory22 = function(){
+  var plateau = new Lyngk.Engine();
+  plateau.initialize();
+  plateau.movePiece("I7","H6");
+  plateau.movePiece("G4","G5");
+  plateau.movePiece("G5","G6");
+  var pile = plateau.getIntersection("G6").getPiecesList();
+  var height = plateau.getIntersection("G6").getNbPieces();
+  assertFalse(plateau.movePiece("H6", "G6"));
+  assertTrue(plateau.getIntersection("G6").getPiecesList() === pile);
+  assertTrue(plateau.getIntersection("G6").getNbPieces() === height);
 };
