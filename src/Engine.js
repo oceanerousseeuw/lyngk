@@ -7,117 +7,79 @@ Lyngk.Color = {BLACK: 0, IVORY: 1, BLUE: 2, RED: 3, GREEN: 4, WHITE: 5};
 Lyngk.Engine = function () {
 
     var plateau = [];
-    var countBlack = 0;
-    var countIvory = 0;
-    var countBlue = 0;
-    var countRed = 0;
-    var countGreen = 0;
-    var countWhite = 0;
+    var colors = [8, 8, 8, 8, 8, 3];
 
-    this.initialize = function(){
+    this.initialize = function () {
         var lettres = "ABCDEFGHI";
-        for (var col=0; col<9; col++){
-            for(var lig=1; lig<=9; lig++){
-                //on teste les intersections pour savoir si elles sont sur le plateau
+        for (var col = 0; col < 9; col++) {
+            for (var lig = 1; lig <= 9; lig++) {
                 var coordinates = new Lyngk.Coordinates(lettres[col], lig);
-                if(coordinates.is_valid()){
-                    if((countBlack+countIvory+countBlue+countRed+countGreen+countWhite) < 43) {
-                        //si c'est vrai, on met une piece au hazard, mais on doit avoir 8 de chaque, sauf les blanches (3)
-                        var intersection = new Lyngk.Intersection(coordinates);
-                        var couleur = this.randomCouleur();
-                        var piece = new Lyngk.Piece(Object.keys(Lyngk.Color)[couleur]);
-                        intersection.poserPiece(piece);
-                        plateau.push(intersection);
-                    }
-                }
+                this.validCoord(coordinates);
             }
         }
     };
 
-    this.randomCouleur = function () {
-        var color = Math.floor(Math.random() * (5 + 1));
-        switch(color){
-            case 0:
-                if(countBlack < 8){
-                    countBlack++;
-                    return Lyngk.Color.BLACK;
-                }else{
-                    return this.randomCouleur();
-                }
-
-            case 1 :
-                if(countIvory < 8){
-                    countIvory++;
-                    return Lyngk.Color.IVORY;
-                }else{
-                    return this.randomCouleur();
-                }
-
-            case 2 :
-                if(countBlue < 8){
-                    countBlue++;
-                    return Lyngk.Color.BLUE;
-                }else{
-                    return this.randomCouleur();
-                }
-
-            case 3 :
-                if(countRed < 8){
-                    countRed++;
-                    return Lyngk.Color.RED;
-                }else{
-                    return this.randomCouleur();
-                }
-
-            case 4 :
-                if(countGreen < 8){
-                    countGreen++;
-                    return Lyngk.Color.GREEN;
-                }else{
-                    return this.randomCouleur();
-                }
-
-            case 5 :
-                if(countWhite < 3){
-                    countWhite++;
-                    return Lyngk.Color.WHITE;
-                }else{
-                    return this.randomCouleur();
-                }
+    this.validCoord = function (coordinates) {
+        if (coordinates.isValid()) {
+            var sum = 0;
+            for (var i = 0; i < colors.length; i++) {
+                sum += colors[i];
+            }
+            this.insertPiece(coordinates, 43 - sum);
         }
     };
 
-    this.getPlateau = function(){
+    this.insertPiece = function (coordinates, sum) {
+        if (sum < 43) {
+            var intersection = new Lyngk.Intersection(coordinates);
+            var color = this.randomColor();
+            var piece = new Lyngk.Piece(Object.keys(Lyngk.Color)[color]);
+            intersection.poserPiece(piece);
+            plateau.push(intersection);
+        }
+    };
+
+    this.randomColor = function () {
+        var color;
+        do {
+            color = Math.floor(Math.random() * (5 + 1));
+        } while (colors[color] === 0);
+        colors[color]--;
+        return color;
+    };
+
+
+    this.getPlateau = function () {
         return plateau;
     };
 
-    this.getBlack = function(){
-        return countBlack;
+    this.getBlack = function () {
+        return 8 - colors[0];
     };
 
-    this.getIvory = function(){
-        return countIvory;
+    this.getIvory = function () {
+        return 8 - colors[1];
     };
 
-    this.getBlue = function(){
-        return countBlue;
+    this.getBlue = function () {
+        return 8 - colors[2];
     };
 
-    this.getRed = function(){
-        return countRed;
+    this.getRed = function () {
+        return 8 - colors[3];
     };
 
-    this.getGreen = function(){
-        return countGreen;
+    this.getGreen = function () {
+        return 8 - colors[4];
     };
 
-    this.getWhite = function(){
-        return countWhite;
+    this.getWhite = function () {
+        return 3 - colors[5];
     };
 
-    this.getIntersection = function(c){
-        for(var i=0; i<plateau.length; i++){
-            if(plateau[i].getCoord().toString() === c){
+    this.getIntersection = function (c) {
+        for (var i = 0; i < plateau.length; i++) {
+            if (plateau[i].getCoord().toString() === c) {
                 return plateau[i];
             }
         }
@@ -176,29 +138,33 @@ Lyngk.Engine = function () {
         }
 
         var deplaceType;
+        var coordTemp;
+        var interTemp;
 
         //test des lignes
-        if( (coord1[0]===coord2[0] && coord1[1]!==coord2[1]))
+        if( (coord1[0]===coord2[0] && coord1[1]!==coord2[1])) {
             deplaceType = "ligne";
+        }
         //test des colonnes
-        else if( (coord1[0]!==coord2[0] && coord1[1]===coord2[1]))
+        else if( (coord1[0]!==coord2[0] && coord1[1]===coord2[1])) {
             deplaceType = "colonne";
+        }
         //test des diagonales
-        else if(Math.abs(coord1[0].charCodeAt()-coord2[0].charCodeAt()) === Math.abs(coord1[1]-coord2[1]))
+        else if(Math.abs(coord1[0].charCodeAt()-coord2[0].charCodeAt()) === Math.abs(coord1[1]-coord2[1])) {
             deplaceType = "diagonale";
-        else{
+        }else{
             return false;
         }
 
         //test déplacement à la ligne suivante
         if(deplaceType === "ligne"){
-            var coordTemp = coord1;
+            coordTemp = coord1;
 
             //si on remonte dans les lignes (ex: de 3 a 2)
             if(parseInt(coord1[1]) - parseInt(coord2[1]) > 0){
                 while (coordTemp !== coord2){
                     coordTemp = coordTemp[0] + (parseInt(coordTemp[1])-1);
-                    var interTemp = this.getIntersection(coordTemp);
+                    interTemp = this.getIntersection(coordTemp);
                     if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
                         return false;
                     }
@@ -208,7 +174,7 @@ Lyngk.Engine = function () {
                 //si on avance dans les lignes (ex: de 2 a 3)
                 while (coordTemp !== coord2){
                     coordTemp = coordTemp[0] + (parseInt(coordTemp[1])+1);
-                    var interTemp = this.getIntersection(coordTemp);
+                    interTemp = this.getIntersection(coordTemp);
                     if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
                         return false;
                     }
@@ -220,13 +186,13 @@ Lyngk.Engine = function () {
 
         //test déplacement à la colonne suivante
         if(deplaceType === "colonne"){
-            var coordTemp = coord1;
+            coordTemp = coord1;
 
             //si on remonte dans les colonnes (ex: de B a A)
             if(((coord1.charCodeAt(0))-(coord2.charCodeAt(0))) > 0){
                 while (coordTemp !== coord2){
                     coordTemp = String.fromCharCode(coordTemp.charCodeAt(0)-1) + coordTemp[1];
-                    var interTemp = this.getIntersection(coordTemp);
+                    interTemp = this.getIntersection(coordTemp);
                     if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
                         return false;
                     }
@@ -236,7 +202,7 @@ Lyngk.Engine = function () {
                //si on va a une colonne plus loin (ex: de A a B)
                 while (coordTemp !== coord2){
                     coordTemp = String.fromCharCode(coordTemp.charCodeAt(0)+1) + coordTemp[1];
-                    var interTemp = this.getIntersection(coordTemp);
+                    interTemp = this.getIntersection(coordTemp);
                     if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
                         return false;
                     }
@@ -248,13 +214,13 @@ Lyngk.Engine = function () {
 
         //test déplacement à la diagonale suivante
         if(deplaceType === "diagonale"){
-            var coordTemp = coord1;
+            coordTemp = coord1;
 
             //si on remonte dans les diagonales (ex: de A3 a B4)
             if((coord1[0].charCodeAt()-coord2[0].charCodeAt()) < 0){
                 while (coordTemp !== coord2){
                     coordTemp = String.fromCharCode(coordTemp.charCodeAt(0)+1) + (parseInt(coordTemp[1])+1);
-                    var interTemp = this.getIntersection(coordTemp);
+                    interTemp = this.getIntersection(coordTemp);
                     if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
                         return false;
                     }
@@ -263,7 +229,7 @@ Lyngk.Engine = function () {
             }else {
                 while (coordTemp !== coord2){
                     coordTemp = String.fromCharCode(coordTemp.charCodeAt(0)-1) + (parseInt(coordTemp[1])-1);
-                    var interTemp = this.getIntersection(coordTemp);
+                    interTemp = this.getIntersection(coordTemp);
                     if(interTemp.getState() !== Lyngk.State.VACANT && coordTemp !== coord2){
                         return false;
                     }
